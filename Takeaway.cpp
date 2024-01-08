@@ -64,28 +64,22 @@ int main()
 		}
 		else if (command.compare("add") == 0)
 		{
-			cout << "Please choose item to add: " << endl;
-			int itemNum;
-			cin >> itemNum;
-			if (itemNum >= 1 && itemNum <= menu.getSize()) {
-				Item* choice = menu.getItem(itemNum); // you need to instantiate this using the menu object!
-				order.add(choice);
-			}
-			else {
-				cout << "Invalid number" << endl;
-			}
-			
-
-			// You may also wish to implement the ability to add multiple items at once!
-			// e.g. add 1 5 9 
+			Item* choice; // you need to instantiate this using the menu object!
+			order.add(choice);
 		}
+
+
+		// You may also wish to implement the ability to add multiple items at once!
+		// e.g. add 1 5 9 
 		else if (command.compare("remove") == 0)
 		{
+			Item* rchoice;
+			order.remove(rchoice);
 
 		}
 		else if (command.compare("checkout") == 0)
 		{
-
+			order.checkout();
 		}
 		else if (command.compare("help") == 0)
 		{
