@@ -15,6 +15,8 @@ Menu::Menu(const string& filename) {
 	}
 	string line;
 	while (getline(file, line)) {
+		Item* newItem = nullptr;
+
 		stringstream ss(line);
 		string type, name;
 		int abv, calories;
@@ -30,35 +32,36 @@ Menu::Menu(const string& filename) {
 		ss.ignore();
 		ss >> two41;
 		ss.ignore();
-		ss >> abv;
-		ss.ignore();
 		ss >> volume;
+		ss.ignore();
+		ss >> abv;
 
 		if (type == "a") {
-			Appetizer* appetizer = new Appetizer;
-			appetizer->name = name;
-			appetizer->price = price;
-			appetizer->calories = calories;
-			appetizer->shareable = shareable;
-			appetizer->two41 = two41;
-			items.push_back(appetizer);
+
+			newItem = new Appetizer;
+			dynamic_cast<Appetizer*>(newItem)->name = name;
+			dynamic_cast<Appetizer*>(newItem)->price = price;
+			dynamic_cast<Appetizer*>(newItem)->calories = calories;
+			dynamic_cast<Appetizer*>(newItem)->shareable = shareable;
+			dynamic_cast<Appetizer*>(newItem)->two41 = two41;
 		}
 		else if (type == "m") {
-			Main* main = new Main;
-			main->name = name;
-			main->price = price;
-			main->calories = calories;
-			items.push_back(main);
+			newItem->name = name;
+			newItem->price = price;
+			newItem->calories = calories;
 		}
 		else if (type == "b") {
-			Beverage* beverage = new Beverage;
-			beverage->name = name;
-			beverage->price = price;
-			beverage->calories = calories;
-			beverage->abv = abv;
-			beverage->volume = volume;
-			items.push_back(beverage);
+			newItem = new Beverage;
+			dynamic_cast<Beverage*>(newItem)->name = name;
+			dynamic_cast<Beverage*>(newItem)->price = price;
+			dynamic_cast<Beverage*>(newItem)->calories = calories;
+			dynamic_cast<Beverage*>(newItem)->abv = abv;
+			dynamic_cast<Beverage*>(newItem)->volume = volume;
 		}
+		items.push_back(newItem);
+
+
+		
 
 	}
 

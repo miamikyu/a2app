@@ -4,63 +4,77 @@
 using namespace std;
 
 Order::Order() {
-
+	eligibleItemCount = 0;
 }
 Order::~Order() {
 
 }
 void Order::add(Item* itemAdd) {
-	//add itemy stuff 
-	cout << "Would you like to 'r' or 'c' checkout?" << endl;
+	//add item 
+	cout << "Enter quantity of item: " << endl;
+	int quantity;
+	cin >> quantity;
+	Item* chosenItem = itemAdd;
+	for (int i = 0; i < quantity; i++) {
+		items.push_back(chosenItem);
+	}
+	cout << "Item has been added" << endl;
+	cout << "Would you like to 'c' checkout?" << endl;
 	string addchoice;
 	cin >> addchoice;
-	if (addchoice == "r") {
-		order.remove();
-	}
-	else if (addchoice == "c") {
-		order.checkout();
+	if (addchoice == "c") {
+		checkout();
 	}
 	else {
 		cout << "Please enter a choice" << endl;
 	}
 }
 void Order::remove(Item* itemRemove) {
+	items.erase(std::remove_if(items.begin(), items.end(),
+		[itemRemove](const Item* item) { return item == itemRemove; }),
+		items.end());
+
+	cout << "Item removed from the order." << endl;
 
 }
-void Order::calculateTotal() {
-
-}
-void Order::checkout(/*insert from total*/) {
-	cout << "Checkout: " << endl;
-	for (Item* item : items) {
-		//insert pointer shit for the actual order
-		if (two41 == true) {
-			cout << "Two - for - 1 discount applied" << endl;
-			cout << "Savings: £3.99" << endl;
-		}
-		cout << "Total: £" << total << endl;
-		cout << "Do you want to place your order?" << endl;
-		cout << "'y' to confirm, or 'n' to modify" << endl;
-		string answer;
-		cin >> answer;
-		if (answer == "y") {
-			//save to txt file
-			cout << "Your reciept has been saved" << endl;
-		}
-		else {
-			cout << "Would you like to 'a' add or 'r' remove from order" << endl;
-			string answer2;
-			cin >> answer2;
-			if (answer2 == "a") {
-				order.add();
-			}
-			else if (answer2 == "r") {
-				order.remove();
-			}
-		}
+float Order::calculateTotal() {
+	float total = 0.0;
+	for (const Item* item : items) {
+		total += item->price;
 	}
+	return total;
 	
 }
+void Order::checkout(/*insert from total*/) {
+	
+	float total = calculateTotal();
+
+	cout << "Checkout: " << endl;
+	for (int i = 0; i < items.size(); i++) {
+		cout << "Items ordered" << i + 1 << ":" << endl;
+		cout << items[i]->toString() << endl;
+	}
+	for (const Item* item : items) {
+		//insert pointer shit for the actual order
+		if (eligibleItemCount >= 2) {
+			int numofDiscounts = eligibleItemCount / 2;
+			float discountAmount = calculateDiscount(total, numofDiscounts);
+			cout << "Discount applied" << endl;
+			cout << "Savings: £" << discountAmount << endl;
+			total - +discountAmount;
+		}
+	}
+	cout << "Total: £" << total << endl;
+
+}
+float Order::calculateDiscount(float total, int numofDiscounts) {
+	float itemPrice = 3.99;
+	return itemPrice * numofDiscounts;
+	}
+
 void Order::help() {
 	cout << "Menu: View Menu '\n' Add: Add menu items to your order '\n' Remove: Remove menu items from your order '\n' Checkout: See your receipt and finish your order!" << endl;
+}
+int Order::getSize() const{
+	return items.size();
 }

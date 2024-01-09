@@ -29,18 +29,18 @@ int main()
 	vector <string> parameters;
 
 	// Create a menu object from a CSV file
-	Menu menu = Menu("C:\\Users\\wmiab\\APP Workshops\\a2app\\menu.csv");
-	cout << "menu size: " << menu.getSize() << endl;
+	Menu menu = Menu("menu.csv");
 
 	// Create an order object
 	Order order = Order();
-	cout << "Please choose from the following:" << endl;
+	//output for the user to choose 
 	cout << "menu" << endl;
 	cout << "add" << endl;
 	cout << "remove" << endl;
 	cout << "checkout" << endl;
 	cout << "help" << endl;
-
+	cout << "exit" << endl;
+	cout << "Please choose from the following: ";
 	while (userCommand != "exit")
 	{
 		getline(cin, userCommand);
@@ -64,8 +64,18 @@ int main()
 		}
 		else if (command.compare("add") == 0)
 		{
-			Item* choice; // you need to instantiate this using the menu object!
-			order.add(choice);
+			cout << "Please enter the item number you want to add: ";
+			int itemNumber;
+			cin >> itemNumber;
+
+			Item* choice = menu.getItem(itemNumber); // you need to instantiate this using the menu object!
+			if (choice != nullptr){
+				order.add(choice);
+			}
+			else {
+				cout << "Invalid number item" << endl;
+
+			}
 		}
 
 
@@ -73,8 +83,14 @@ int main()
 		// e.g. add 1 5 9 
 		else if (command.compare("remove") == 0)
 		{
-			Item* rchoice;
-			order.remove(rchoice);
+			cout << "Enter the number of item remove: ";
+			int itemnum;
+			cin >> itemnum;
+			if (itemnum >= 1 && itemnum <= order.getSize()) {
+				Item* rchoice = menu.getItem(itemnum);
+				order.remove(rchoice);
+			}
+			
 
 		}
 		else if (command.compare("checkout") == 0)
@@ -85,10 +101,9 @@ int main()
 		{
 			order.help();
 		}
-		cout << "Please choose an option: " << endl;
-
-		parameters.clear();
-
+		else {
+			cout << "Please choose an option: " << endl;
+		}
 	}
 
 	cout << "Press any key to quit...";
