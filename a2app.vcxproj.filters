@@ -66,5 +66,8 @@
     <None Include="..\..\Downloads\menu.csv">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="menu2.csv">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

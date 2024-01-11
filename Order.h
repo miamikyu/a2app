@@ -1,6 +1,7 @@
 #pragma once
 #include "ItemList.h"
 #include "Item.h"
+#include <vector>
 
 class Order : public ItemList
 {
@@ -14,9 +15,7 @@ public:
 	void help();
 	Order();
 	~Order();
-	int getSize() const;
 private:
-	vector<Item*>items;
 	float calculateDiscount(float total, int numofDiscounts);
 	int eligibleItemCount;
 

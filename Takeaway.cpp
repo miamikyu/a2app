@@ -29,7 +29,7 @@ int main()
 	vector <string> parameters;
 
 	// Create a menu object from a CSV file
-	Menu menu = Menu("menu.csv");
+	Menu menu = Menu("menu2");
 
 	// Create an order object
 	Order order = Order();
@@ -58,8 +58,9 @@ int main()
 		}
 
 		string command = parameters[0];
-
+		cout << "before if";
 		if (command.compare("menu") == 0) {
+			cout << "before menu";
 			cout << menu.toString();
 		}
 		else if (command.compare("add") == 0)
@@ -68,28 +69,25 @@ int main()
 			int itemNumber;
 			cin >> itemNumber;
 
-			Item* choice = menu.getItem(itemNumber); // you need to instantiate this using the menu object!
-			if (choice != nullptr){
-				order.add(choice);
-			}
-			else {
-				cout << "Invalid number item" << endl;
+			/*Item* choice; // you need to instantiate this using the menu object!
+			
+			order.add(choice);*/
 
-			}
 		}
+	
+
 
 
 		// You may also wish to implement the ability to add multiple items at once!
 		// e.g. add 1 5 9 
 		else if (command.compare("remove") == 0)
 		{
-			cout << "Enter the number of item remove: ";
+			std::cout << "Enter the number of item remove: ";
 			int itemnum;
 			cin >> itemnum;
-			if (itemnum >= 1 && itemnum <= order.getSize()) {
-				Item* rchoice = menu.getItem(itemnum);
-				order.remove(rchoice);
-			}
+			
+			/*Item* rchoice;
+			order.remove(rchoice);*/
 			
 
 		}

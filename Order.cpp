@@ -75,6 +75,3 @@ float Order::calculateDiscount(float total, int numofDiscounts) {
 void Order::help() {
 	cout << "Menu: View Menu '\n' Add: Add menu items to your order '\n' Remove: Remove menu items from your order '\n' Checkout: See your receipt and finish your order!" << endl;
 }
-int Order::getSize() const{
-	return items.size();
-}

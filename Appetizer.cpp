@@ -11,3 +11,6 @@ string Appetizer::toString() const {
     field += "Two For One: " + (two41 ? string("Yes") : string("No")) + "\n";
     return field;
 }
+Appetizer::Appetizer(){
+
+}

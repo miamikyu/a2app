@@ -1,6 +1,6 @@
 #pragma once
 #include "Item.h"
-class Beverage: public Item
+class Beverage : public Item
 {
 public:
 	string toString() const override;

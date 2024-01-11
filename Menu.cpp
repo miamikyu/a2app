@@ -7,16 +7,13 @@
 #include <iostream>
 #include <string>
 
+
 Menu::Menu(const string& menu) {
-	ifstream file(menu);
-	if (!file.is_open()) {
-		cout << "Error opening file: " << menu << endl;
-		return;
-	}
+	cout <<"menu to string";
+	istringstream file(menu);
 	string line;
 	while (getline(file, line)) {
-		Item* newItem = nullptr;
-
+		cout << line << endl;
 		stringstream ss(line);
 		string type, name;
 		int abv, calories;
@@ -38,27 +35,31 @@ Menu::Menu(const string& menu) {
 
 		if (type == "a") {
 
-			newItem = new Appetizer;
-			dynamic_cast<Appetizer*>(newItem)->name = name;
-			dynamic_cast<Appetizer*>(newItem)->price = price;
-			dynamic_cast<Appetizer*>(newItem)->calories = calories;
-			dynamic_cast<Appetizer*>(newItem)->shareable = shareable;
-			dynamic_cast<Appetizer*>(newItem)->two41 = two41;
+			Appetizer* a = new Appetizer;
+			a->name = name;
+			a->calories = calories;
+			a->price = price;
+			a->shareable = shareable;
+			a->two41 = two41;
+			items.push_back(a);
 		}
 		else if (type == "m") {
-			newItem->name = name;
-			newItem->price = price;
-			newItem->calories = calories;
+			Main* m = new Main;
+			m->name = name;
+			m->calories = calories;
+			m->price = price;
+			items.push_back(m);
 		}
 		else if (type == "b") {
-			newItem = new Beverage;
-			dynamic_cast<Beverage*>(newItem)->name = name;
-			dynamic_cast<Beverage*>(newItem)->price = price;
-			dynamic_cast<Beverage*>(newItem)->calories = calories;
-			dynamic_cast<Beverage*>(newItem)->abv = abv;
-			dynamic_cast<Beverage*>(newItem)->volume = volume;
+			Beverage* b = new Beverage;
+			b->name = name;
+			b->calories = calories;
+			b->price = price;
+			b->volume = volume;
+			b->abv = abv;
+			items.push_back(b);
 		}
-		items.push_back(newItem);
+		
 
 
 		
@@ -70,22 +71,13 @@ Menu::~Menu() {
 
 }
 string Menu::toString() const {
-	string field;
+	string output;
 	int index = 1;
-
+	cout << items.size();
 	for (const Item* item : items) {
-		field += to_string(index) + ". "+ item->toString() + "\n";
+		output +=index + ". " + items[index]->toString() + "\n";
 		index++;
 	}
-	return field;
+	return output; 
 }
-Item* Menu::getItem(int itemNum)const {
-	if (itemNum >= 1 && itemNum <= items.size()) {
-		return items[itemNum - 1]; 
-	}
 
-	return nullptr;
-}
-int Menu::getSize() const {
-	return items.size();
-}
