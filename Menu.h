@@ -3,11 +3,16 @@
 #include "Item.h"
 #include <vector>
 
+//child class of itemList
 class Menu : public ItemList
 {
+	//public methods
 public:
-	Menu(const string& filename);
+	//constructor takes menu as a reference
+	Menu(const string& menu);
+	//deconstructor
 	~Menu();
+	//to String method from menu 
 	string toString() const;
 };
 

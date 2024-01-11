@@ -58,14 +58,14 @@ int main()
 		}
 
 		string command = parameters[0];
-		cout << "before if";
 		if (command.compare("menu") == 0) {
-			cout << "before menu";
 			cout << menu.toString();
 		}
 		else if (command.compare("add") == 0)
 		{
+			//asks if want number item they want to add 
 			cout << "Please enter the item number you want to add: ";
+			//takes an input
 			int itemNumber;
 			cin >> itemNumber;
 
@@ -82,7 +82,9 @@ int main()
 		// e.g. add 1 5 9 
 		else if (command.compare("remove") == 0)
 		{
+			//asks user number of item to remove 
 			std::cout << "Enter the number of item remove: ";
+			//takes on input 
 			int itemnum;
 			cin >> itemnum;
 			
@@ -93,17 +95,20 @@ int main()
 		}
 		else if (command.compare("checkout") == 0)
 		{
+			//checkout function
 			order.checkout();
 		}
 		else if (command.compare("help") == 0)
 		{
+			//help function
 			order.help();
 		}
 		else {
+			//else will ask to choose an option
 			cout << "Please choose an option: " << endl;
 		}
 	}
-
+	//quit
 	cout << "Press any key to quit...";
 	std::getchar();
 
