@@ -73,6 +73,7 @@ Menu::Menu(const string& menu) {
 				two41 = false;
 			}
 			//pushes the value into the class so theyre not empty
+			a->type = type;
 			a->name = name;
 			a->calories = calories;
 			a->price = price;
@@ -88,6 +89,7 @@ Menu::Menu(const string& menu) {
 			name = hold[1];
 			calories = stoi(hold[3]);
 			price = stof(hold[2]);
+			m->type = type;
 			m->name = name;
 			m->calories = calories;
 			m->price = price;
@@ -103,6 +105,7 @@ Menu::Menu(const string& menu) {
 			price = stoi(hold[2]);
 			volume = stoi(hold[6]);
 			abv = stof(hold[7]);
+			b->type = type;
 			b->name = name;
 			b->calories = calories;
 			b->price = price;

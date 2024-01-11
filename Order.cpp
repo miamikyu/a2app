@@ -1,6 +1,6 @@
 #include "Order.h"
 #include <iostream>
-
+#include "Appetizer.h"
 using namespace std;
 //constructor
 Order::Order() {
@@ -12,7 +12,7 @@ Order::~Order() {
 
 }
 //add item
-void Order::add(Item* itemAdd) {
+void Order::add(const Item* itemAdd) {
 	//add item 
 	//asks to enter quantity of item
 	cout << "Enter quantity of item: " << endl;
@@ -20,7 +20,7 @@ void Order::add(Item* itemAdd) {
 	int quantity;
 	cin >> quantity;
 	//takes the chosen item from parameters
-	Item* chosenItem = itemAdd;
+	const Item* chosenItem = itemAdd;
 	//for loop until quantity is met - item is pushed back onto vector
 	for (int i = 0; i < quantity; i++) {
 		items.push_back(chosenItem);
@@ -42,7 +42,7 @@ void Order::add(Item* itemAdd) {
 	}
 }
 //thsi removes an item
-void Order::remove(Item* itemRemove) {
+void Order::remove(const Item* itemRemove) {
 	//uses lambda function to remove from the end of the item vector
 	items.erase(std::remove_if(items.begin(), items.end(),
 		[itemRemove](const Item* item) { return item == itemRemove; }),
@@ -75,19 +75,34 @@ void Order::checkout() {
 	for (int i = 0; i < items.size(); i++) {
 		int index = 1;
 		cout <<to_string(index)<< items[i]->toString() << endl;
+		if (items[i]->type == "a") {
+			if (((const Appetizer*)items[i])->two41) {
+
+				eligibleItemCount++;
+			}
+		}
 		index++;
 	}
-	//for item in item 
+	/*//for item in item 
 	for (const Item* item : items) {
-		//this determines any eligible items for discount 
-		if (eligibleItemCount >= 2) {
-			int numofDiscounts = eligibleItemCount / 2;
-			float discountAmount = calculateDiscount(total, numofDiscounts);
-			//if they do then they will get a print of how much they saved
-			cout << "Discount applied" << endl;
-			cout << "Savings: \x9c" << discountAmount << endl;
-			total - +discountAmount;
+		if (item->type == "a") {
+			if (((const Appetizer*)item)->two41) {
+
+				eligibleItemCount++;
+			}
 		}
+	}
+	*/
+
+
+	//this determines any eligible items for discount 
+	if (eligibleItemCount >= 2) {
+		int numofDiscounts = eligibleItemCount / 2;
+		float discountAmount = calculateDiscount(total, numofDiscounts);
+		//if they do then they will get a print of how much they saved
+		cout << "Discount applied" << endl;
+		cout << "Savings: \x9c" << discountAmount << endl;
+		total - +discountAmount;
 	}
 	//else the total will be dispalyed
 	cout << "Total: \x9c" << total << endl;

@@ -14,6 +14,7 @@ public:
 	string name;
 	int calories;
 	float price;
+	string type;
 };
 //child class of item, but doesn't have any special attributes 
 //will just inherit original attributes from item

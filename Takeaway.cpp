@@ -57,6 +57,12 @@ int main()
 			token = strtok(NULL, " ");
 		}
 
+		if (parameters.empty()) {
+
+			continue;
+
+		}
+
 		string command = parameters[0];
 		if (command.compare("menu") == 0) {
 			cout << menu.toString();
@@ -66,12 +72,21 @@ int main()
 			//asks if want number item they want to add 
 			cout << "Please enter the item number you want to add: ";
 			//takes an input
-			int itemNumber;
+			string itemNumber;
 			cin >> itemNumber;
+			try {
+				int index = stoi(itemNumber);
+				index--;
+				const Item* choice=menu.items[index];
+				order.add(choice);// you need to instantiate this using the menu object!
+			}
+			catch (invalid_argument) {
+				cout << "Error" << endl;
+			}
 
-			/*Item* choice; // you need to instantiate this using the menu object!
 			
-			order.add(choice);*/
+			
+			
 
 		}
 	
@@ -85,7 +100,7 @@ int main()
 			//asks user number of item to remove 
 			std::cout << "Enter the number of item remove: ";
 			//takes on input 
-			int itemnum;
+			string itemnum;
 			cin >> itemnum;
 			
 			/*Item* rchoice;

@@ -9,9 +9,9 @@ class Order : public ItemList
 public:
 	//all the functions that the user needs to interact with the takeaway app
 	//add items - takes an item from reference to add
-	void add(Item* itemAdd);
+	void add(const Item* itemAdd);
 	//removes items in the same way as add but removes from the order
-	void remove(Item* itemRemove);
+	void remove(const Item* itemRemove);
 	//calculates the user's total
 	float calculateTotal();
 	//checkout the user giving them their discount and reciept
