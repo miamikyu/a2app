@@ -144,7 +144,9 @@
     <ClInclude Include="Order.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Downloads\menu.csv" />
+    <None Include="..\..\Downloads\menu.csv">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="reciept.txt" />

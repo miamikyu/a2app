@@ -58,13 +58,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Downloads\menu.csv">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="reciept.txt">
       <Filter>Source Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Downloads\menu.csv">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -7,10 +7,10 @@
 #include <iostream>
 #include <string>
 
-Menu::Menu(const string& filename) {
-	ifstream file(filename);
+Menu::Menu(const string& menu) {
+	ifstream file(menu);
 	if (!file.is_open()) {
-		cout << "Error opening file: " << filename << endl;
+		cout << "Error opening file: " << menu << endl;
 		return;
 	}
 	string line;
