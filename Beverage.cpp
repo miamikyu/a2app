@@ -15,7 +15,8 @@ void Beverage::isAlcoholic() {
 }
 string Beverage::toString() const {
 	string field = Item::toString();
-	field += "Abv: " + (abv);
+	field += "Abv: " + to_string(abv);
+	field += ", ";
 	field += "Volume: " + to_string(volume);
 	return field;
-}
+	}

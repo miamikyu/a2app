@@ -2,9 +2,8 @@
 #include <iostream>
 using namespace std; 
 string Item::toString() const {
-    cout << "item to string";
-    string field = "Name: " + name + "\n";
-    field += "Calories: " + to_string(calories) + "\n";
-    field += "Price: £" + to_string(price) + "\n";
+    string field = "Name: " + name + ", ";
+    field += "Calories: " + to_string(calories) + ", ";
+    field += "Price: \x9C" + to_string(price) + ", ";
     return field;
 }

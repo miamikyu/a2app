@@ -29,7 +29,7 @@ int main()
 	vector <string> parameters;
 
 	// Create a menu object from a CSV file
-	Menu menu = Menu("menu2");
+	Menu menu = Menu("menu2.csv");
 
 	// Create an order object
 	Order order = Order();

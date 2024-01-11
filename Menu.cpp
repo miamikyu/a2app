@@ -10,32 +10,51 @@
 
 Menu::Menu(const string& menu) {
 	cout <<"menu to string";
-	istringstream file(menu);
+	ifstream file(menu);
 	string line;
+	vector<string>store;
 	while (getline(file, line)) {
-		cout << line << endl;
-		stringstream ss(line);
-		string type, name;
-		int abv, calories;
-		float price, volume;
-		bool shareable, two41;
-		getline(ss, type, ',');
-		getline(ss, name, ',');
-		ss >> price;
-		ss.ignore();
-		ss >> calories;
-		ss.ignore();
-		ss >> shareable;
-		ss.ignore();
-		ss >> two41;
-		ss.ignore();
-		ss >> volume;
-		ss.ignore();
-		ss >> abv;
+		store.push_back(line + ",");
+	}
+	file.close();
+	vector<string>hold;
+	string current_word;
+	string type, name;
+	bool shareable = false;
+	bool two41 = false;
+	int calories, abv;
+	float price, volume;
 
-		if (type == "a") {
+	for(string line : store){
+		for (int i = 0; i < line.size(); i++) {
+			if (line[i] == ',')
+			{
+				hold.push_back(current_word);
+				current_word = "";
+			}
+			else {
+				current_word += line[i];
+			}
+		}
 
+
+		if (hold[0] == "a") {
 			Appetizer* a = new Appetizer;
+			name = hold[1];
+			calories = stoi(hold[3]);
+			price = stof(hold[2]);
+			if (shareable == 'y') {
+				shareable = true;
+			}
+			else {
+				shareable = false;
+			}
+			if (two41 == 'y') {
+				two41 = true;
+			}
+			else {
+				two41 = false;
+			}
 			a->name = name;
 			a->calories = calories;
 			a->price = price;
@@ -43,15 +62,23 @@ Menu::Menu(const string& menu) {
 			a->two41 = two41;
 			items.push_back(a);
 		}
-		else if (type == "m") {
+		else if (hold[0] == "m") {
 			Main* m = new Main;
+			name = hold[1];
+			calories = stoi(hold[3]);
+			price = stof(hold[2]);
 			m->name = name;
 			m->calories = calories;
 			m->price = price;
 			items.push_back(m);
 		}
-		else if (type == "b") {
+		else if (hold[0] == "b") {
 			Beverage* b = new Beverage;
+			name = hold[1];
+			calories = stoi(hold[3]);
+			price = stoi(hold[2]);
+			volume = stoi(hold[6]);
+			abv = stof(hold[7]);
 			b->name = name;
 			b->calories = calories;
 			b->price = price;
@@ -59,23 +86,23 @@ Menu::Menu(const string& menu) {
 			b->abv = abv;
 			items.push_back(b);
 		}
-		
-
-
-		
-
+		else {
+			cout << "Error" << endl;
+		}
+		hold.clear();
 	}
-
 }
+
+
 Menu::~Menu() {
 
 }
 string Menu::toString() const {
-	string output;
+	string output = "";
 	int index = 1;
-	cout << items.size();
 	for (const Item* item : items) {
-		output +=index + ". " + items[index]->toString() + "\n";
+		output += index + ". " + item->toString() + "\n";
+
 		index++;
 	}
 	return output; 
